@@ -13,24 +13,24 @@ public class ArrayUtilTest {
      * @param ele
      * @return
      */
-    public static String[] removeAll(String []str,String ele) {
+    public static String[] removeAll(String []str1,String ele) {
 
         int count = 0;
-        for(int i = 0;i < str.length;i++) {
-            if(str[i].equals(ele)) {
+        for(int i = 0;i < str1.length;i++) {
+            if(str1[i].equals(ele)) {
                 count+=1;
             } else {
-                str[i-count] = str[i];
+                str1[i-count] = str1[i];
             }
         }
-       return Arrays.copyOf(str,str.length - count);
+       return Arrays.copyOf(str1,str1.length - count);
     }
 
 
 
 
     public static void main(String[] args) {
-        String []s = {"ee","aa","bb","ee","ff","gg","ee","hh","00","zz","ii","dd","ee"};
+        String []s = {"ee","aa","bb","ee","sf","gg","ee","hh","00","zz","ii","dd","ee"};
 
         System.out.println("---------查找------------");
         System.out.println(Arrays.binarySearch(s,"ee"));//2

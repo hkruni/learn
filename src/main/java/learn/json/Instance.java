@@ -3,15 +3,14 @@ package learn.json;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
-import java.io.Serializable;
 import java.util.Date;
 
 public class Instance {
 
     private String name;
 
-//    @JSONField(serialzeFeatures= SerializerFeature.WriteMapNullValue)   //null输出为null
- //   @JSONField(serialzeFeatures=SerializerFeature.WriteNullStringAsEmpty) //null输出为""
+//  @JSONField(serialzeFeatures= SerializerFeature.WriteMapNullValue)   //null输出为null
+//  @JSONField(serialzeFeatures=SerializerFeature.WriteNullStringAsEmpty) //null输出为""
     private String address;
 
     //@JSONField(serialzeFeatures=SerializerFeature.WriteNullNumberAsZero)
