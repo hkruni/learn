@@ -10,10 +10,6 @@ class MyMoney {
 		this.money = money;
 	}
 
-	/**
-	 * 参数是一个函数接口，输入是Integer类型，输出的String类型
-	 * @param moneyFormat
-	 */
 	public void printMoney(Function<Integer, String> moneyFormat) {
 		System.out.println("我的存款" + moneyFormat.apply(this.money));
 	}
@@ -26,8 +22,9 @@ public class MoneyDemo {
 
 		Function<Integer, String> moneyFormat = i -> new DecimalFormat("#,###")
 				.format(i);
-		
-		me.printMoney(moneyFormat.andThen(s -> " 人民币" + s));
+
+		//andThen也是Function的一个方法，传入一个值得到另一个返回值
+		me.printMoney(moneyFormat.andThen(s -> " 人民币" + s).andThen(s -> s + "结束"));
 	}
 
 }

@@ -11,7 +11,7 @@ public class PathChildrenCache_Sample_POST_INITIALIZED_EVENT {
 
     static String path = "/zk-book";
     static CuratorFramework client = CuratorFrameworkFactory.builder()
-            .connectString("127.0.0.1:2182")
+            .connectString("domain1.book.zookeeper:2181")
             .retryPolicy(new ExponentialBackoffRetry(1000, 3))
             .sessionTimeoutMs(5000)
             .build();

@@ -19,11 +19,11 @@ public class EchoServer {
 
     public void start() throws Exception {
         final EchoServerHandler serverHandler = new EchoServerHandler();
-        EventLoopGroup group = new NioEventLoopGroup();
+        EventLoopGroup group = new NioEventLoopGroup();//Reactor线程池，负责调度执行客户端的接入、读写
         try {
             ServerBootstrap b = new ServerBootstrap();
             b.group(group)
-                    .channel(NioServerSocketChannel.class)
+                    .channel(NioServerSocketChannel.class)//底层自动利用反射创建服务端channel
                     .localAddress(new InetSocketAddress(port))
                     .childHandler(new ChannelInitializer<SocketChannel>(){
                         @Override

@@ -2,11 +2,10 @@ package learn.java8.lambda;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.IntUnaryOperator;
+import java.util.function.*;
 
 class Dog {
-	private String name = "����Ȯ";
+	private String name = "啸天犬";
 
 	/**
 	 * Ĭ��10�ﹷ��
@@ -18,7 +17,7 @@ class Dog {
 	}
 
 	/**
-	 * �������Ĺ��캯��
+	 * 带参数的构造函数
 	 * 
 	 * @param name
 	 */
@@ -27,24 +26,20 @@ class Dog {
 	}
 
 	/**
-	 * ���У���̬����
+	 * 狗叫，静态方法
 	 * 
 	 * @param dog
 	 */
 	public static void bark(Dog dog) {
-		System.out.println(dog + "����");
+		System.out.println(dog + "叫了");
 	}
 
 	/**
-	 * �Թ��� JDK
-	 * 
-	 * Ĭ�ϻ�ѵ�ǰʵ�����뵽�Ǿ�̬������������Ϊthis��λ���ǵ�һ����
-	 * 
-	 * @param num
-	 * @return ��ʣ�¶��ٽ�
+	 * 吃狗粮
+	 * JDK默认把当前实例对象传入到非静态方法，参数名为this，位置是第一个参数
 	 */
-	public int eat(int num) {
-		System.out.println("����" + num + "�ﹷ��");
+	public int eat(Dog this,int num) {
+		System.out.println("吃了" + num + "斤狗粮");
 		this.food -= num;
 		return this.food;
 	}
@@ -61,36 +56,36 @@ public class MethodRefrenceDemo {
 		Dog dog = new Dog();
 		dog.eat(3);
 
-		// ��������
+		//->左边只有一个参数，右边的函数体页只有一个参数，可以采用简写的方式
 		Consumer<String> consumer = System.out::println;
-		consumer.accept("���ܵ�����");
+		consumer.accept("接收的数据");
 
-		// ��̬�����ķ�������
+		// 静态方法的方法引用
 		Consumer<Dog> consumer2 = Dog::bark;
 		consumer2.accept(dog);
 
-		// �Ǿ�̬������ʹ�ö���ʵ���ķ�������
-		// Function<Integer, Integer> function = dog::eat;
-		// UnaryOperator<Integer> function = dog::eat;
+		// 非静态方法，使用对象实例
+		//Function<Integer, Integer> function = dog::eat;
+		//UnaryOperator<Integer> function = dog::eat;
 		IntUnaryOperator function = dog::eat;
 		
-		// dog�ÿգ���Ӱ������ĺ���ִ�У���Ϊjava �����Ǵ�ֵ
+		//设置为null对function也不会有影响
 		dog = null;
-		System.out.println("��ʣ��" + function.applyAsInt(2) + "��");
+		System.out.println("还剩下" + function.applyAsInt(2) + "斤");
 		//
-		// // ʹ����������������
-		// BiFunction<Dog, Integer, Integer> eatFunction = Dog::eat;
-		// System.out.println("��ʣ��" + eatFunction.apply(dog, 2) + "��");
-		//
-		// // ���캯���ķ�������
-		// Supplier<Dog> supplier = Dog::new;
-		// System.out.println("�������¶���" + supplier.get());
-		//
-		// // �������Ĺ��캯���ķ�������
-		// Function<String, Dog> function2 = Dog::new;
-		// System.out.println("�������¶���" + function2.apply("����"));
+		//使用类名来方法引用
+		BiFunction<Dog, Integer, Integer> eatFunction = Dog::eat;
+		System.out.println("还剩下" + eatFunction.apply(dog, 2) + "斤");
 
-		// ����java�����Ǵ�ֵ���Ǵ�����
+		// 构造函数的方法引用
+		Supplier<Dog> supplier = Dog::new;
+		System.out.println("创建了新对象" + supplier.get());
+
+		//带参数的构造函数方法引用
+		Function<String, Dog> function2 = Dog::new;
+		System.out.println("创建了新对象" + function2.apply("旺财"));
+
+
 		List<String> list = new ArrayList<>();
 		test(list);
 

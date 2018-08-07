@@ -12,7 +12,7 @@ public class PathChildrenCache_Sample_NoCacheData {
 
     static String path = "/zk-book";
     static CuratorFramework client = CuratorFrameworkFactory.builder()
-            .connectString("127.0.0.1:2182")
+            .connectString("domain1.book.zookeeper:2181")
             .retryPolicy(new ExponentialBackoffRetry(1000, 3))
             .sessionTimeoutMs(5000)
             .build();
@@ -25,13 +25,13 @@ public class PathChildrenCache_Sample_NoCacheData {
 					               PathChildrenCacheEvent event) throws Exception {
 				switch (event.getType()) {
 				case CHILD_ADDED:
-					System.out.println("CHILD_ADDED," + new String(event.getData().getData()));
+					System.out.println("CHILD_ADDED," + event.getData().getData());
 					break;
 				case CHILD_UPDATED:
-					System.out.println("CHILD_UPDATED," + new String(event.getData().getData()));
+					System.out.println("CHILD_UPDATED," + event.getData().getData());
 					break;
 				case CHILD_REMOVED:
-					System.out.println("CHILD_REMOVED," + new String(event.getData().getPath()));
+					System.out.println("CHILD_REMOVED," + event.getData().getPath());
 					break;
 				default:
 					break;

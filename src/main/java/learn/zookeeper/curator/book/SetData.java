@@ -7,16 +7,17 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
 public class SetData {
 
     public static void main(String[] args) throws Exception {
-        String path = "/create/one";
+        String path = "/create/";
         CuratorFramework client = CuratorFrameworkFactory.builder()
-                .connectString("127.0.0.1:2182")
+                .connectString("112.35.29.127:2182")
                 .sessionTimeoutMs(5000)
                 .namespace("base")
                 .retryPolicy(new ExponentialBackoffRetry(1000,3))
                 .build();
 
         client.start();
-        client.setData().forPath(path,"heihei".getBytes());
+        client.create().creatingParentsIfNeeded().forPath(path);
+        client.setData().forPath(path,"two".getBytes());
     }
 
 

@@ -15,9 +15,9 @@ public class GuavaList {
 
 	public static void main(String[] args) {
 		
-		System.out.println(Strings.isNullOrEmpty("\t"));
+		System.out.println(Strings.isNullOrEmpty("\t"));//false
 		
-		System.out.println(Strings.padStart("abc", 5, 'x'));
+		System.out.println(Strings.padStart("abc", 5, 'x'));//xxabc
 	
 		System.out.println(Strings.commonPrefix("abcd2idjsdna","abcdw1sasas"));
 		

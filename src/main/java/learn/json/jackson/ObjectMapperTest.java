@@ -14,6 +14,7 @@ public class ObjectMapperTest {
 
     private static  ObjectMapper objectMapper = new ObjectMapper();
 
+
     public static String BeanToStr(Object o) {
         try {
             return objectMapper.writeValueAsString(o);

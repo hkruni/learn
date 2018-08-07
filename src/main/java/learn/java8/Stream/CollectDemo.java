@@ -114,11 +114,11 @@ public class CollectDemo {
 				new Student("小马", 14, Gender.FEMALE, Grade.FOUR),
 				new Student("小刘", 13, Gender.MALE, Grade.FOUR));
 
-		// 得到所有学生的年龄列表
-		// s -> s.getAge() --> Student::getAge , 不会多生成一个类似 lambda$0这样的函数
+		// 得到所有学生的年龄列表,去重
 		Set<Integer> ages = students.stream().map(Student::getAge)
 				.collect(Collectors.toCollection(TreeSet::new));
 		System.out.println("所有学生的年龄:" + ages);
+
 
 		// 统计汇总信息
 		IntSummaryStatistics agesSummaryStatistics = students.stream()

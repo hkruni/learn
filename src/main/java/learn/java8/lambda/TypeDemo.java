@@ -29,7 +29,7 @@ public class TypeDemo {
 		IMath createLambda = createLambda();
 		
 		TypeDemo demo = new TypeDemo();
-		//当有二义性时，使用强转对应的接口解决
+		//当有二义性时(IMath和Imath2都满足)，使用强转对应的接口解决
 		demo.test( (IMath2)(x, y) -> x + y);
 	}
 	

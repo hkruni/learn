@@ -12,7 +12,7 @@ public class PathChildrenCache_Sample {
 
     static String path = "/zk-book";
     static CuratorFramework client = CuratorFrameworkFactory.builder()
-            .connectString("localhost:2182")
+            .connectString("domain1.book.zookeeper:2181")
             .retryPolicy(new ExponentialBackoffRetry(1000, 3))
             .sessionTimeoutMs(5000)
             .build();
@@ -28,7 +28,7 @@ public class PathChildrenCache_Sample {
 					System.out.println("CHILD_ADDED," + event.getData().getPath());
 					break;
 				case CHILD_UPDATED:
-					System.out.println("CHILD_UPDATED," + event.getData().getPath() + " " + new String(event.getData().getData()));
+					System.out.println("CHILD_UPDATED," + event.getData().getPath());
 					break;
 				case CHILD_REMOVED:
 					System.out.println("CHILD_REMOVED," + event.getData().getPath());
@@ -38,13 +38,13 @@ public class PathChildrenCache_Sample {
 				}
 			}
 		});
-		/*client.create().withMode(CreateMode.PERSISTENT).forPath(path);
+		client.create().withMode(CreateMode.PERSISTENT).forPath(path);
 		Thread.sleep( 1000 );
 		client.create().withMode(CreateMode.PERSISTENT).forPath(path+"/c1");
 		Thread.sleep( 1000 );
 		client.delete().forPath(path+"/c1");
 		Thread.sleep( 1000 );
-		client.delete().forPath(path);*/
+		client.delete().forPath(path);
 		Thread.sleep(Integer.MAX_VALUE);
 	}
 }

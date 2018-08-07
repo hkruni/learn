@@ -21,12 +21,16 @@ public class StreamDemo1 {
 		}
 		System.out.println("外部迭代结果为：" + sum);
 
+
 		// 使用stream的内部迭代，map属于中间操作，sum指的终止操作，返回类型Stream是中间操作，否则就是终止操作
-		int sum2 = IntStream.of(nums).map(StreamDemo1::doubleNum).sum();
-		System.out.println("内部迭代结果为：" + sum2);
+		//int sum2 = IntStream.of(nums).map(StreamDemo1::doubleNum).sum();
+		//System.out.println("内部迭代结果为：" + sum2);
 
 		System.out.println("惰性求值就是终止没有调用的情况下，中间操作不会执行：");
 		IntStream.of(nums).map(StreamDemo1::doubleNum);//这里并没有执行doubleNum方法，说明中间操作不会执行
+
+
+
 	}
 
 	public static int doubleNum(int i) {

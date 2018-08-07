@@ -4,6 +4,7 @@ import java.util.function.Function;
 
 /**
  * 级联表达式和柯里化
+ * 柯里化目的：函数标准化
  */
 public class CurryDemo {
 
@@ -25,7 +26,7 @@ public class CurryDemo {
 				if (obj instanceof Function) {
 					f = (Function) obj;
 				} else {
-					System.out.println("���ý��������Ϊ" + obj);
+					System.out.println("结束：" + obj);
 				}
 			}
 		}

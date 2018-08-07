@@ -10,7 +10,7 @@ public class CreateNode {
     public static void main(String[] args) throws Exception {
 
         CuratorFramework client = CuratorFrameworkFactory.builder()
-                .connectString("127.0.0.1:2182")
+                .connectString("112.35.29.127:2181")
                 .sessionTimeoutMs(5000)
                 .namespace("base")
                 .retryPolicy(new ExponentialBackoffRetry(1000,3))

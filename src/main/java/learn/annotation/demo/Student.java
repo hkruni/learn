@@ -5,6 +5,7 @@ import learn.annotation.face.MethonAnnoatation;
 
 public class Student {
 
+
     private int id;
     private String name;
     private int  result;
