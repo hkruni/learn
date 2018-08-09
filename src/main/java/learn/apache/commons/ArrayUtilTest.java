@@ -1,8 +1,10 @@
 package learn.apache.commons;
 
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class ArrayUtilTest {
 
@@ -31,6 +33,11 @@ public class ArrayUtilTest {
 
     public static void main(String[] args) {
         String []s = {"ee","aa","bb","ee","sf","gg","ee","hh","00","zz","ii","dd","ee"};
+        List<String> list = Lists.newArrayList("123","456","789","10");
+
+        String []s2 = new String[list.size()];
+        list.toArray(s2);
+        Arrays.stream(s2).forEach(System.out::println);
 
         System.out.println("---------查找------------");
         System.out.println(Arrays.binarySearch(s,"ee"));//2

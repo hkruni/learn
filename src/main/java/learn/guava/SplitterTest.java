@@ -61,6 +61,13 @@ public class SplitterTest {
         System.out.println("String.join.list : " + String.join("+",list1));
 
 
+        List<String> lll = Lists.newArrayList("11","22","33","44");
+        String  sss = Joiner.on("|").join(new String[]{"1","2","3","4","5"});
+        System.out.println(sss);
+        String sss2 = Joiner.on(".*").join(lll);
+        System.out.println(sss2);
+
+        System.out.print(Joiner.on("+").useForNull("haha").join(new String[]{"123","345","282",null,"233"}));
 
 
     }

@@ -19,8 +19,10 @@ public class StreamDemo2 {
 		list.stream();
 		list.parallelStream();
 
+
 		// 从数组创建
 		Arrays.stream(new int[] { 2, 3, 5 });
+
 
 		// 创建数字流
 		IntStream.of(1, 2, 3);
@@ -31,7 +33,7 @@ public class StreamDemo2 {
 		Random random = new Random();
 
 		// 自己产生流
-		Stream.generate(() -> random.nextInt()).limit(20);
+		Stream.generate(() -> random.nextInt(100)).limit(20).forEach(System.out::print);
 
 	}
 

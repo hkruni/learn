@@ -13,6 +13,8 @@ public class FunctionParam {
 	private static Student findOk(Callable <Student> callable) {
 		Student student = null;
 		try {
+			System.out.println("callable: " + Thread.currentThread().getName());
+
 			student = callable.call();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -29,14 +31,16 @@ public class FunctionParam {
 	
 	
 	public interface Handler {
-		
 		public <T> T Handler(T result);
 	}
 	
 	
 	public static void main(String[] args) {
 		Student student = new Student("aaa", 29, 105, new Date());
+		System.out.println("main: " + Thread.currentThread().getName());
 		Student re = findOk(() -> {
+			System.out.println("findOk: " + Thread.currentThread().getName());
+
 			student.setAge(student.getAge() - 2);
 			return student;
 		});
