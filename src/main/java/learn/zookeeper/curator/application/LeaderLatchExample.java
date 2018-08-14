@@ -1,21 +1,20 @@
-package learn.zookeeper.curator.book;
+package learn.zookeeper.curator.application;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.google.common.collect.Lists;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.recipes.leader.LeaderLatch;
 import org.apache.curator.framework.recipes.leader.LeaderLatchListener;
 import org.apache.curator.retry.ExponentialBackoffRetry;
-//import org.apache.curator.test.TestingServer;
 import org.apache.curator.utils.CloseableUtils;
 
-import com.google.common.collect.Lists;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+//import org.apache.curator.test.TestingServer;
 
 public class LeaderLatchExample {
     private static final int CLIENT_QTY = 10;
