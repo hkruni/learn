@@ -81,15 +81,15 @@ public class Student {
         return "Student [name=" + name + ", age=" + age + ", result=" + result + ", createTime=" + createTime + "]";
     }
 
-    @Override
-    public int hashCode() {
-        return 1;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return true;
-    }
+//    @Override
+//    public int hashCode() {
+//        return 1;
+//    }
+//
+//    @Override
+//    public boolean equals(Object obj) {
+//        return true;
+//    }
 
     public static void main(String[] args) {
 

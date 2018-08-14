@@ -12,7 +12,7 @@ public class ObjectsTest {
     public static void main(String[] args) {
         Student s1 = new Student(1,"aaa",100);
         Student s2 = new Student(1,"aaa",100);
-        System.out.println(Objects.equals(s1,s2));
+        System.out.println(Objects.equals(s1,s2));//false
         Objects.hashCode(s1);
 
         if (s1 != null && s2 != null && Objects.equals(s1,s2)) {

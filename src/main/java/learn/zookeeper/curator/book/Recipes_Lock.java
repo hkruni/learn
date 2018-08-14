@@ -12,7 +12,7 @@ public class Recipes_Lock {
 
 	static String lock_path = "/curator_recipes_lock_path";
     static CuratorFramework client = CuratorFrameworkFactory.builder()
-            .connectString("127.0.0.1:2182")
+            .connectString("112.35.29.127:2182")
             .retryPolicy(new ExponentialBackoffRetry(1000, 3)).build();
 	public static void main(String[] args) throws Exception {
 		client.start();

@@ -16,9 +16,9 @@ public class GuavaList {
 	public static void main(String[] args) {
 		
 		System.out.println(Strings.isNullOrEmpty("\t"));//false
-		
+		System.out.println(Strings.isNullOrEmpty("	"));//false
 		System.out.println(Strings.padStart("abc", 5, 'x'));//xxabc
-	
+		System.out.println(Strings.padEnd("abc", 9, '2'));//abc222222
 		System.out.println(Strings.commonPrefix("abcd2idjsdna","abcdw1sasas"));
 		
 		
@@ -33,7 +33,6 @@ public class GuavaList {
 			public String apply(Student input) {
 				return input.getName();
 			}
-			
 		}).asMap();
 		
 		map.forEach((k,v) -> {

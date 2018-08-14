@@ -18,7 +18,7 @@ import org.apache.zookeeper.data.Id;
 public class CuratorAcl {
 
 	public CuratorFramework client = null;
-	public static final String zkServerPath = "192.168.1.110:2181";
+	public static final String zkServerPath = "112.35.29.127:2181";
 
 	public CuratorAcl() {
 		RetryPolicy retryPolicy = new RetryNTimes(3, 5000);

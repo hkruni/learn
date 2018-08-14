@@ -4,7 +4,6 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.sun.tools.javac.code.Attribute;
 
 import java.util.Arrays;
 import java.util.List;
