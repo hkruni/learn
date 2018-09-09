@@ -10,14 +10,9 @@ import org.apache.zookeeper.CreateMode;
 public class NodeCache_Node_Not_Exist_Sample {
 
     static String path = "/curator_nodecache_sample";
-    static CuratorFramework client = CuratorFrameworkFactory.builder()
-            .connectString("domain1.book.zookeeper:2181")
-            .sessionTimeoutMs(5000)
-            .retryPolicy(new ExponentialBackoffRetry(1000, 3))
-            .build();
 	
 	public static void main(String[] args) throws Exception {
-		client.start();
+		CuratorFramework client = getClient();
 	    final NodeCache cache = new NodeCache(client,path,false);
 		cache.start(true);
 		cache.getListenable().addListener(new NodeCacheListener() {
@@ -32,5 +27,18 @@ public class NodeCache_Node_Not_Exist_Sample {
 	      .withMode(CreateMode.EPHEMERAL)
 	      .forPath(path, "init".getBytes());
 		Thread.sleep( Integer.MAX_VALUE );
+	}
+
+
+	private static CuratorFramework getClient() {
+		CuratorFramework client = CuratorFrameworkFactory.builder()
+				.connectString("112.35.29.127:2182")
+				.sessionTimeoutMs(5000)
+				.namespace("base")
+				.retryPolicy(new ExponentialBackoffRetry(1000,3))
+				.build();
+
+		client.start();
+		return client;
 	}
 }

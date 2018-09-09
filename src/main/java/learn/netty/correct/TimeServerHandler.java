@@ -35,7 +35,6 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
 	 * @param msg
 	 * @throws Exception
 	 */
-    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg)
 	    throws Exception {
 		ByteBuf byteBuf = (ByteBuf) msg;
@@ -51,7 +50,6 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
 		ctx.channel().writeAndFlush(resp);
     }
 
-	@Override
 	public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
 		ctx.flush();
 	}

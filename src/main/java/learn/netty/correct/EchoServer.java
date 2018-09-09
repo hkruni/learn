@@ -19,7 +19,8 @@ public class EchoServer {
 
     public void start() throws Exception {
         final EchoServerHandler serverHandler = new EchoServerHandler();
-        EventLoopGroup group = new NioEventLoopGroup();//Reactor线程池，负责调度执行客户端的接入、读写
+        //Reactor线程池，负责调度执行客户端的接入、读写  实际就是EventLoop数组
+        EventLoopGroup group = new NioEventLoopGroup();
         try {
             ServerBootstrap b = new ServerBootstrap();
             b.group(group)
