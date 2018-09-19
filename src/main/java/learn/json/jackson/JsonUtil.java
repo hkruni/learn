@@ -6,17 +6,17 @@ import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.collect.Lists;
 
-import learn.apache.commons.DateTimeUtil;
+import com.sun.org.apache.xpath.internal.SourceTree;
+import learn.apacheCommons.DateTimeUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 
-import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by geely
@@ -26,20 +26,16 @@ public class JsonUtil {
 
     private static ObjectMapper objectMapper = new ObjectMapper();
     static{
-        //对象的所有字段全部列入
+        //对象的所有字段全部列入，不论null或""
         objectMapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
-
         //取消默认转换timestamps形式，即不采用时间戳形式
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,false);
-
         //忽略空Bean转json的错误
         objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS,false);
-
-        //所有的日期格式都统一为以下的样式，即yyyy-MM-dd HH:mm:ss
-        objectMapper.setDateFormat(new SimpleDateFormat(DateTimeUtil.STANDARD_FORMAT));
-
         //忽略在json字符串中存在，但是在java对象中不存在对应属性的情况。防止错误
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        //所有的日期格式都统一为以下的样式，即yyyy-MM-dd HH:mm:ss
+        objectMapper.setDateFormat(new SimpleDateFormat(DateTimeUtil.STANDARD_FORMAT));
     }
 
 
@@ -125,32 +121,34 @@ public class JsonUtil {
 
 
 
+    public static void main(String[] args) throws InvocationTargetException, IllegalAccessException {
+        //==============j对象转son字符串===========
+        TestPojo testPojo1 = new TestPojo();
+        testPojo1.setName("Geely");
+        testPojo1.setId(1);
+        testPojo1.setDate(new Date());
+        TestPojo testPojo2 = new TestPojo();
+        testPojo2.setName("John");
+        testPojo2.setId(2);
+        testPojo2.setDate(new Date());
+        String testPojoJson = JsonUtil.obj2String(testPojo1);//转json
+        System.out.println(testPojoJson);//{"name":"Geely","id":666,"date":"2018-09-11 11:47:18"}
 
 
-
-
-
-    public static void main(String[] args) {
-        TestPojo testPojo = new TestPojo();
-        testPojo.setName("Geely");
-        testPojo.setId(666);
-
-
-        String json = "{\"name\":\"Geely\",\"color\":\"blue\",\"id\":666}";
+        //==============json字符串转对象===========
+        String json = "{\"name\":\"Geely\",\"id\":666,\"date\":\"2017-03-11 09:28:08\"}";
         TestPojo testPojoObject = JsonUtil.string2Obj(json,TestPojo.class);
-        String testPojoJson = JsonUtil.obj2String(testPojo);
-        log.info("testPojoJson:{}",testPojoJson);
+        System.out.println(testPojoObject);
 
-        log.info("end");
+
+
 
         User u1 = new User();
-        u1.setId(2);
+        u1.setId(1);
         u1.setEmail("geely@happymmall.com");
         u1.setCreateTime(new Date());
         String userJsonPretty = JsonUtil.obj2StringPretty(u1);
-        log.info("userJson:{}",userJsonPretty);
-
-
+        System.out.println(userJsonPretty);
         User u2 = new User();
         u2.setId(2);
         u2.setEmail("geelyu2@happymmall.com");
@@ -158,35 +156,34 @@ public class JsonUtil {
 
 
         String user1Json = JsonUtil.obj2String(u2);
-
         String user1JsonPretty = JsonUtil.obj2StringPretty(u2);
-
-        log.info("user1Json:{}",user1Json);
-
-        log.info("user1JsonPretty:{}",user1JsonPretty);
+        System.out.println(user1Json);
+        System.out.println(user1JsonPretty);
 
 
         User user = JsonUtil.string2Obj(user1Json,User.class);
 
 
+        //===========测试列表List转json============
+        System.out.println("===========测试列表List============");
         List<User> userList = Lists.newArrayList();
         userList.add(u1);
         userList.add(u2);
-
+        List<TestPojo> testPojoList = Lists.newArrayList(testPojo1,testPojo2);
+        u1.setList(testPojoList);
         String userListStr = JsonUtil.obj2StringPretty(userList);
-
-        log.info("==================");
-
-        log.info(userListStr);
+        System.out.println(userListStr);
 
 
-        List<User> userListObj1 = JsonUtil.string2Obj(userListStr, new TypeReference<List<User>>() {
-        });
-
-
+        System.out.println("===========测试Json字符串转列表List=，两种方法===========");
+        List<User> userListObj1 = JsonUtil.string2Obj(userListStr, new TypeReference<List<User>>() {});
         List<User> userListObj2 = JsonUtil.string2Obj(userListStr,List.class,User.class);
+        userListObj1.forEach(System.out::println);
 
-        System.out.println("end");
+        System.out.println("===========测试BeanUtils===========");
+        User u3 = new User();
+        BeanUtils.copyProperties(u3,u1);
+        System.out.println(u3);
 
     }
 

@@ -1,4 +1,4 @@
-package learn.apache.commons;
+package learn.apacheCommons;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -12,6 +12,7 @@ public class StringTest {
         System.out.println("---------判断是否为空或数字--------------");
         System.out.println(StringUtils.isEmpty("\r\n"));//false,判断null或长度为0
         System.out.println(StringUtils.isBlank("\r\n"));//true
+        System.out.println(StringUtils.isBlank("   "));//true
         String  s = "\b   aa  a\t";
         System.out.println(s.length());//10
         System.out.println(StringUtils.trim(s).length());//5
@@ -49,5 +50,10 @@ public class StringTest {
         System.out.println(StringUtils.repeat(s2,":",3));//abc:abc:abc
         System.out.println(StringUtils.remove("abc|asa|2121|2121","|"));
 
+        System.out.println("--------补齐，重复----------");
+        String s6 = "mynameiskdkadlsakda";
+        System.out.println(StringUtils.startsWith(s6, "my"));//true
+        System.out.println(StringUtils.startsWithAny(s6, "usa", "dsad", "das","myname"));//true
+        System.out.println(StringUtils.startsWithIgnoreCase(s6, "MyName"));//true
     }
 }

@@ -1,10 +1,9 @@
-package learn.apache.commons;
+package learn.apacheCommons;
 
 import com.google.common.collect.Lists;
 import org.apache.commons.collections.CollectionUtils;
 
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,8 +28,8 @@ public class CollectionUtilsTest {
         List<Student> l2 = Lists.newArrayList(s3,s4,s8);
 
         System.out.println(CollectionUtils.isEmpty(list));//false,null或者size为0就是empty
-        System.out.println(CollectionUtils.isEqualCollection(list,list2));//true
-        System.out.println(CollectionUtils.isEqualCollection(l1,l2));//true 需要重写equals和hashcode方法
+        System.out.println(CollectionUtils.isEqualCollection(list,list2));//true,只比较内容，不管顺序
+        System.out.println(CollectionUtils.isEqualCollection(l1,l2));//false 需要重写equals和hashcode方法
 
         CollectionUtils.addAll(list,new String[]{"111","999"});
         System.out.println(l1.size());//7
@@ -39,7 +38,7 @@ public class CollectionUtilsTest {
         //l1.retainAll(l2);//l1和l2的交集保存在l1
         //l2.stream().forEach(System.out::println);
 
-        System.out.println(CollectionUtils.containsAny(l1,l2));//l1随便包含l2// 一个就返回true
+        System.out.println(CollectionUtils.containsAny(l1,l2));//l1随便包含l2其中一个就返回true
 
         Collections.replaceAll(l1,s1,s2);
         l1.get(1).setName("jingdong");
