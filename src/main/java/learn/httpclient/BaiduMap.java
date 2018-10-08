@@ -44,16 +44,22 @@ public class BaiduMap {
         }
 
         HttpClient httpClient = HttpClients.createDefault();
-        StringBuilder sb = new StringBuilder(BAIDU_MAP_GEOCONV_API);
-        sb.append("address=").append(encodeAddress).append("&")
-                .append("city=").append(encodeCity).append("&")
-                .append("output=json&")
-                .append("ak=").append(BAIDU_MAP_KEY);
+//        StringBuilder sb = new StringBuilder(BAIDU_MAP_GEOCONV_API);
+//        sb.append("address=").append(encodeAddress).append("&")
+//                .append("city=").append(encodeCity).append("&")
+//                .append("output=json&")
+//                .append("ak=").append(BAIDU_MAP_KEY);
+//        String getUrl = sb.toString();
 
-        HttpGet get = new HttpGet(sb.toString());
+
+        String getUrl = String.format("%saddress=%s&city=%s&output=json&ak=%s",BAIDU_MAP_GEOCONV_API,encodeAddress,
+                encodeCity,BAIDU_MAP_KEY);
+
+        HttpGet get = new HttpGet(getUrl);
         try {
             HttpResponse response = httpClient.execute(get);
             if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
+                return;
             }
 
             String result = EntityUtils.toString(response.getEntity(), "UTF-8");

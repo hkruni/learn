@@ -35,6 +35,7 @@ public class User implements Serializable {
 
     private Date updateTime;
 
+    private List<TestPojo> list;
 
     @Override
     public String toString() {

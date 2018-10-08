@@ -1,5 +1,7 @@
 package learn.BasicType;
 
+import com.google.common.base.Objects;
+
 /**
  * Created by hukai on 2018/7/27.
  */
@@ -12,6 +14,7 @@ public class IntegerTest {
         Integer d = 3;
         Integer e = 321;
         Integer f = 321;
+        Integer g1 = null;
         Long g = 3L;
 
         System.out.println(c == d);//true
@@ -24,6 +27,11 @@ public class IntegerTest {
         long x1 = 3L;
         int x2 = 3;
         System.out.println(x1 == x2);//true
+
+
+        System.out.println(Objects.equal(3,g1));
+
+
 
     }
 }

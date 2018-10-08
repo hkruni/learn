@@ -4,7 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
-import learn.apache.commons.Student;
+import learn.apacheCommons.Student;
 
 import java.util.Collection;
 import java.util.Date;
