@@ -15,7 +15,8 @@ public class NullTest {
         System.out.println(s.getName());
         s = null;
 
-        if (s == null || s.getName() == null) {
+        //这里s==null 为true，那么后面就不执行了
+        if (s == null || s.getName().equals("abc") ) {
             System.out.println("异常");
         } else {
             System.out.println("正常");
