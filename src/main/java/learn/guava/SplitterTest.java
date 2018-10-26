@@ -15,33 +15,51 @@ import java.util.Objects;
  */
 public class SplitterTest {
 
+
+    /**
+     * 字符串收尾两端的空格去掉
+     * @param src
+     * @param seprator
+     */
+    public static void split(String src,String seprator){
+        List<String> list = Splitter.on(seprator).trimResults().splitToList(src);
+        list.forEach(System.out::println);
+    }
+
+    /**
+     * 去掉分隔后的空字符串
+     * @param src
+     * @param seprator
+     */
+    public static void splitOmit(String src,String seprator){
+        List<String> list = Splitter.on(seprator).omitEmptyStrings().splitToList(src);
+        list.forEach(System.out::println);
+    }
+
+
+    public static void splitOmitResukt(String src,String seprator){
+        List<String> list = Splitter.on(seprator).omitEmptyStrings().trimResults().splitToList(src);
+        list.forEach(System.out::println);
+    }
+
+
+
+
     public static void main(String[] args) {
 
+
+        String s = "123 , 321,   453,,741,41321";
+        //split(s,",");
+        //splitOmit(s,",");
+        splitOmitResukt(s,",");
+
+
+
+        System.out.println("-----------------------------------------------");
+        System.out.println("-----------------------------------------------");
+        System.out.println("-----------------------------------------------");
+
         List<String> list1 = Lists.newArrayList("111","222","333","555");
-
-        StringBuilder stringBuilder = new StringBuilder("hello");
-        // 字符串连接器，以|为分隔符，同时去掉null元素
-        Joiner joiner1 = Joiner.on("|").skipNulls();
-        // 构成一个字符串foo|bar|baz并添加到stringBuilder
-        stringBuilder = joiner1.appendTo(stringBuilder, "foo", "bar", null, "baz");
-        System.out.println(stringBuilder);
-
-        System.out.println("join list : " + joiner1.join(list1));//111|222|333|555
-
-
-
-
-        Map<String, String> testMap = Maps.newLinkedHashMap();
-        testMap.put("Cookies", "12332");
-        testMap.put("Content-Length", "30000");
-        testMap.put("Date", "2016.12.16");
-        testMap.put("Mime", "text/html");
-        // 用:分割键值对，并用#分割每个元素，返回字符串
-        String returnedString = Joiner.on("#").withKeyValueSeparator(":").join(testMap);
-        System.out.println("returnedString : " + returnedString);
-
-
-
         String s0 = "113|33|44|66|921";
         String s1 = "aaa()bbb()ccc()ddd";
         String []ss1 = s0.split("\\|");
@@ -52,6 +70,7 @@ public class SplitterTest {
         ss3.stream().forEach(System.out::println);
 
 
+        //正则表达式的特殊字符串都会被处理掉
         System.out.println("String.join.list : " + String.join("()",list1));
         System.out.println("String.join.list : " + String.join("|",list1));
         System.out.println("String.join.list : " + String.join("\\",list1));
@@ -60,13 +79,7 @@ public class SplitterTest {
         System.out.println("String.join.list : " + String.join("+",list1));
 
 
-        List<String> lll = Lists.newArrayList("11","22","33","44");
-        String  sss = Joiner.on("|").join(new String[]{"1","2","3","4","5"});
-        System.out.println(sss);
-        String sss2 = Joiner.on(".*").join(lll);
-        System.out.println(sss2);
 
-        System.out.print(Joiner.on("+").useForNull("haha").join(new String[]{"123","345","282",null,"233"}));
 
 
     }
