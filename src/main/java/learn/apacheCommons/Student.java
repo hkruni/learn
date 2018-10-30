@@ -16,6 +16,7 @@ public class Student {
 
     private Date createTime;
 
+    private List<Integer> types;
 
     public String getName() {
         return name;
@@ -55,6 +56,13 @@ public class Student {
         this.createTime = createTime;
     }
 
+    public List<Integer> getTypes() {
+        return types;
+    }
+
+    public void setTypes(List<Integer> types) {
+        this.types = types;
+    }
 
     public Student() {
 
@@ -64,11 +72,11 @@ public class Student {
 
 
     public Student(String name, Integer age, Integer result, Date createTime) {
-        super();
         this.name = name;
         this.age = age;
         this.result = result;
         this.createTime = createTime;
+        this.types = types;
     }
 
     private Integer getAgeOne() {
@@ -78,8 +86,16 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student [name=" + name + ", age=" + age + ", result=" + result + ", createTime=" + createTime + "]";
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", result=" + result +
+                ", createTime=" + createTime +
+                ", types=" + types +
+                '}';
     }
+
+
 
 //    @Override
 //    public int hashCode() {

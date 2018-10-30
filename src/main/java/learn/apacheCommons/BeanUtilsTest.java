@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.common.collect.Lists;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
@@ -40,6 +41,7 @@ public class BeanUtilsTest {
 
 	/**
 	 * map类型转bean
+	 * 包含整型、字符串、Date
 	 */
 	public static void populate() {
 		Student s = new Student();
@@ -124,7 +126,11 @@ public class BeanUtilsTest {
 		}
 	}
 
-	//bean转map
+	/**
+	 * bean转map，所有属性
+	 * @param obj
+	 * @return
+	 */
 	public static Map<String, Object> transBean2Map(Object obj) {
 
 		if(obj == null){
@@ -136,7 +142,7 @@ public class BeanUtilsTest {
 			PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
 			for (PropertyDescriptor property : propertyDescriptors) {
 				String key = property.getName();
-				// 过滤class属性
+				// 过滤class属性不转
 				if (!key.equals("class")) {
 					Method getter = property.getReadMethod();
 					Object value = getter.invoke(obj);
@@ -153,21 +159,24 @@ public class BeanUtilsTest {
 	}
 
 
-
-	//bean转map
+	/**
+	 * bean转map
+	 * @param obj 要转换的对象
+	 * @param props 需要被转的属性名称
+	 * @return
+	 */
 	public static Map<String, Object> transBean2MapByPrpperties(Object obj,String [] props) {
 
-		if(obj == null){
+		if(obj == null){//要转的对象为空就返回空
 			return null;
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			BeanInfo beanInfo = Introspector.getBeanInfo(obj.getClass());
 			PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
-			for (PropertyDescriptor property : propertyDescriptors) {
+			for (PropertyDescriptor property : propertyDescriptors) {//遍历bean的所有属性
 				String key = property.getName();
-				// 过滤class属性
-				if (ArrayUtils.contains(props,key)) {
+				if (ArrayUtils.contains(props,key)) {//如果这个属性的名称再props中，就写进map
 					Method getter = property.getReadMethod();
 					Object value = getter.invoke(obj);
 					map.put(key, value);
@@ -177,9 +186,7 @@ public class BeanUtilsTest {
 		} catch (Exception e) {
 			System.out.println("transBean2Map Error " + e);
 		}
-
 		return map;
-
 	}
 
 
