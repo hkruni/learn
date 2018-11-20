@@ -29,9 +29,18 @@ public class ArrayUtilTest {
     }
 
 
+    public static boolean contains(Integer [] array,int x) {
+        return ArrayUtils.contains(array,x);
+    }
+
 
 
     public static void main(String[] args) {
+
+        Integer [] a = {1,2,3,4,5,9,2365,89};
+        System.out.println(contains(a,2365));
+
+
         String []s = {"ee","aa","bb","ee","sf","gg","ee","hh","00","zz","ii","dd","ee"};
         List<String> list = Lists.newArrayList("123","456","789","10");
 
@@ -51,9 +60,6 @@ public class ArrayUtilTest {
         System.out.println(Arrays.toString(s));//原数组不变
         String [] re = removeAll(s,"ee");
         System.out.println(Arrays.toString(re));
-
-
-
 
         System.out.println("----------反转等--------------");
         ArrayUtils.reverse(s);//改变原数组的顺序

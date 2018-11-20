@@ -13,12 +13,19 @@ public class Test2 {
     public static  String REGEX_EMAIL = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
     public static  String REGEX_CHINESE = "^[\u4e00-\u9fa5]+$";
 
+    public static String REGEX_NUMRIC = "\\d+(,\\d+)*";
+
 
     public static void main(String[] args) {
 
         System.out.println(Pattern.matches(REGEX_QQ,"377217153"));//true
         System.out.println(Pattern.matches(REGEX_MOBILE, "18728192010"));//true
         System.out.println(Pattern.matches(REGEX_CHINESE, "打开手机打"));//true
+        System.out.println(Pattern.matches(REGEX_NUMRIC, "123,1,2,321,21313,431,9x"));//true
+
+
+        System.out.println("==========================");
+
 
         String a="love23next234csdn3423javaeye";
         String regEx="(\\d+)";//匹配数字的表达式
