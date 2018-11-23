@@ -12,19 +12,27 @@ import io.netty.handler.timeout.IdleStateEvent;
  * @author
  */
 public class SimpleServerHandler extends ChannelInboundHandlerAdapter {
+
+
+    public void channelActive(ChannelHandlerContext ctx) {
+        System.out.println("channelActive");
+
+    }
+
+    //收到完整的包才执行包括\r\n
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-//        System.out.println(msg.toString());
-//        ctx.channel().writeAndFlush("is ok\r\n");
-        //ctx.close();
+        System.out.println("receive client message :" + msg.toString());
+        ctx.channel().writeAndFlush("is ok\r\n");
+        //ctx.close();//服务端关闭channel，客户端的f.channel().closeFuture().sync();会立马返回，然后客户端关闭
 
 
-        ServerRequest request = JSONObject.parseObject(msg.toString(),ServerRequest.class);
-        Response resp = new Response();
-        resp.setId(request.getId());//response的ID就是request的ID
-        resp.setResult("is ok");
-        ctx.channel().writeAndFlush(JSONObject.toJSONString(resp));
-        ctx.channel().writeAndFlush("\r\n");
+//        ServerRequest request = JSONObject.parseObject(msg.toString(),ServerRequest.class);
+//        Response resp = new Response();
+//        resp.setId(request.getId());//response的ID就是request的ID
+//        resp.setResult("is ok");
+//        ctx.channel().writeAndFlush(JSONObject.toJSONString(resp));
+//        ctx.channel().writeAndFlush("\r\n");
     }
 
     @Override
@@ -47,6 +55,7 @@ public class SimpleServerHandler extends ChannelInboundHandlerAdapter {
     }
 
 
+    //收到客户端消息就行执行，客户端多个writeflush就执行多次
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
         System.out.println("channelReadComplete");

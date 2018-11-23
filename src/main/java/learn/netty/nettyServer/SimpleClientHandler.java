@@ -12,7 +12,14 @@ import io.netty.util.AttributeKey;
 public class SimpleClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println("msg : " + msg.toString());
+        String message = msg.toString();
+        System.out.println("receive server message : " + message);
+        if (message.contains("ok")) {
+            Thread.sleep(1000);
+            ctx.channel().writeAndFlush("haha");
+            ctx.channel().writeAndFlush("12345");
+            //ctx.channel().writeAndFlush("\r\n");
+        }
 
 //        if ("ping".equals(msg.toString())) {
 //            ctx.channel().writeAndFlush("ping\r\n");
@@ -21,8 +28,8 @@ public class SimpleClientHandler extends ChannelInboundHandlerAdapter {
         //ctx.channel().attr(AttributeKey.valueOf("sssss")).set(msg);
         //ctx.channel().close();
 
-        Response response = JSONObject.parseObject(msg.toString(),Response.class);
-        DefaultFuture.receive(response);
+//        Response response = JSONObject.parseObject(msg.toString(),Response.class);
+//        DefaultFuture.receive(response);
 
 
     }

@@ -32,6 +32,7 @@ public final class Server {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         public void initChannel(SocketChannel ch) {
+                            //0代表 \r\n  1代表\n
                             ch.pipeline().addLast(new DelimiterBasedFrameDecoder(65535, Delimiters.lineDelimiter()[0]));
                             ch.pipeline().addLast(new StringDecoder());
                             ch.pipeline().addLast(new SimpleServerHandler());

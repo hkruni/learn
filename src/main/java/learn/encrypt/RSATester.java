@@ -27,7 +27,7 @@ public class RSATester {
 
     static void test() throws Exception {
         System.err.println("公钥加密——私钥解密");
-        String source = "这是一行没有任何意义的文字，你看完了等于没看，不是吗？";
+        String source = "saddasdadsadsad";
         System.out.println("\r加密前文字：\r\n" + source);
         byte[] data = source.getBytes();
         byte[] encodedData = RSAUtils2.encryptByPublicKey(data, publicKey);
