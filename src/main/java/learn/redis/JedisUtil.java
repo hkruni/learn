@@ -18,6 +18,11 @@ public class JedisUtil {
         jedisPool = new JedisPool(config, "localhost", 6379, 10000);
     }
 
+    public static Jedis getJedis() {
+       return jedisPool.getResource();
+    }
+
+
     public static void main(String[] args) {
         Jedis jedis = jedisPool.getResource();
         System.out.println(jedis.setbit("c1",2,true));
