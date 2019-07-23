@@ -1,5 +1,6 @@
 package learn.json.jackson;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
@@ -174,6 +175,7 @@ public class JsonUtil {
         String userListStr = JsonUtil.obj2StringPretty(userList);
         System.out.println(userListStr);
 
+        String fastjsonstr = JSON.toJSONString(userList);
 
         System.out.println("===========测试Json字符串转列表List=，两种方法===========");
         List<User> userListObj1 = JsonUtil.string2Obj(userListStr, new TypeReference<List<User>>() {});
